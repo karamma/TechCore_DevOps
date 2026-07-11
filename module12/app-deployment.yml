@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-app-deployment
+  name: my-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app-deployment
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: my-app-deployment
+    spec:
+      containers:
+      - image: my-app:k8s
+        name: my-app
+        imagePullPolicy: IfNotPresent
+        resources: {}
+status: {}
