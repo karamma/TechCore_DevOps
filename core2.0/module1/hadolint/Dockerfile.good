@@ -1,0 +1,6 @@
+FROM ubuntu:22.04
+WORKDIR /app
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y curl=7.18 python3= && \
+    rm -rf /var/lib/apt/lists/*
+COPY app.py .

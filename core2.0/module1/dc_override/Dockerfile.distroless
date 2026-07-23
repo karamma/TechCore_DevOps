@@ -1,0 +1,10 @@
+FROM golang:1.22-alpine AS builder
+WORKDIR /app
+COPY main.go .
+RUN go mod init exec && \
+    go mod tidy && \
+    CGO_ENABLED=0 GOOS=linux go build -o exec .
+
+FROM gcr.io/distroless/static-debian12
+COPY --from=builder /app/exec .
+ENTRYPOINT ["./exec"]
